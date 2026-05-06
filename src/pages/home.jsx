@@ -2,7 +2,7 @@ import CarouselComponent from "../components/crousel";
 import Tabs from "../components/tabs";
 import { useEffect } from "react";
 import axios from "axios";
-import Banner from "../components/Banner";
+import Banner from "../components/banner";
 
 
 function Home() {
