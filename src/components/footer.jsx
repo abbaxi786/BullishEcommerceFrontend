@@ -18,9 +18,8 @@ function Footer() {
             <h5 className="fw-bold mt-3">Bullish</h5>
           </Col>
 
-          {/* Links */}
           <Col md={4}>
-            <h6 className="fw-bold">Quick Links</h6>
+            <h6 className="fw-bold mt-3">Quick Links</h6>
             <ul className="list-unstyled">
               <li>
                 <Link className="text-light text-decoration-none" to="/">

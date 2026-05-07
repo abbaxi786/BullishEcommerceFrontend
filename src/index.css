@@ -57,7 +57,7 @@
   text-align: center;
   text-decoration: none;
   color: black;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
 }
 
@@ -101,11 +101,11 @@
   }
 }
 
-.sizeUp{
+.sizeUp {
   transition: transform ease 0.4s;
 }
 
-.sizeUp:hover{
+.sizeUp:hover {
   transform: scale(1.05);
 }
 
@@ -115,4 +115,26 @@
 
 .piece:hover {
   color: #ffca2c;
+}
+
+
+.bannerSetting {
+  height: 450px;
+  width: 100%;
+  background-image: url('/images/mainBanner.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .bannerSetting {
+    height: 500px;
+    width: 100%;
+    background-image: url('/images/smallScreenBanner.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
 }

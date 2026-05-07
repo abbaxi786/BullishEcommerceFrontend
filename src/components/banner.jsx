@@ -8,17 +8,16 @@ function Banner() {
     <div className="container-fluid p-0">
 
       <div
-        className="d-flex justify-content-center align-items-center"
+        className="d-flex justify-content-center align-items-center bannerSetting"
         style={{
           height: "450px",
-          backgroundImage: "url('/images/mainBanner.png')",
+          cursor: "pointer",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "contain",
-          cursor: "pointer",
         }}
         onClick={() => navigate("/category/featured")}
-      ></div>
+      />
 
       <div className="row g-0">
 
