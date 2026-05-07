@@ -39,6 +39,12 @@ function NavBar() {
             <Nav.Link as={Link} to="/" className="fw-semibold py-2">
               Home
             </Nav.Link>
+            <Nav.Link as={Link} to="/about" className="fw-semibold py-2">
+              About Us
+            </Nav.Link>
+            <Nav.Link as={Link} to="/blog" className="fw-semibold py-2">
+              Blogs
+            </Nav.Link>
 
             
 

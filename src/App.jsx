@@ -20,6 +20,9 @@ import Setting from './pages/setting'
 import ForgottenEmail from './pages/forgottenPassword/email'
 import ResetPasswordPage from './pages/forgottenPassword/reset'
 import FeaturedDeals from './pages/features'
+import AboutUs from './pages/about'
+import BlogPage from './pages/blog'
+import { BlogContentPage } from './pages/blogcontent'
 
 
 function App() {
@@ -47,6 +50,9 @@ function App() {
           <Route path='/forgotpassword' element={<ForgottenEmail/>}/>
           <Route path='/resetpassword/:token' element={<ResetPasswordPage/>}/>
           <Route path='/category/featured' element={<FeaturedDeals/>}/>
+          <Route path='/about' element={<AboutUs/>}/>
+          <Route path='/blog' element={<BlogPage/>}/>
+          <Route path='/blogcontent' element={<BlogContentPage/>}/>          
         </Routes>
         <Footer />
 
