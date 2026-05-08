@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaBars, FaBox, FaShoppingCart, FaPlus } from "react-icons/fa";
 import { PiFlagBannerFoldFill } from "react-icons/pi";
 import { RiFolderUserLine } from "react-icons/ri";
+import { MdOutlineConnectWithoutContact } from "react-icons/md";
 
 import Product from "./adminComponents/products";
 import Order from "./adminComponents/Order";
@@ -12,6 +13,7 @@ import UserView from "./adminComponents/user";
 import PanelLogIn from "./panellogin";
 import BannerList from "./adminComponents/bannerShow";
 import ApprovalComment from "./adminComponents/aprovalComment";
+import ContactTable from "./adminComponents/contactdetails";
 
 function MainPanel() {
   const [activeTab, setActiveTab] = useState("orders");
@@ -47,6 +49,7 @@ function MainPanel() {
       case "banner":          return <BannerItems />;
       case "user":            return <UserView />;
       case "bannerShow":      return <BannerList />;
+      case "contactTable":      return <ContactTable />;
       default:                return <Order />;
     }
   };
@@ -137,6 +140,14 @@ function MainPanel() {
               <PiFlagBannerFoldFill /> Approval FeedBack
             </button>
           </li>
+          <li className="nav-item">
+            <button
+              className={`nav-link ${activeTab === "contactTable" ? "bg-warning text-dark" : "text-white"}`}
+              onClick={() => { setActiveTab("contactTable"); setShowSidebar(false); }}
+            >
+              <MdOutlineConnectWithoutContact /> Contact
+            </button>
+          </li>
 
         </ul>
 
@@ -145,7 +156,6 @@ function MainPanel() {
         </button>
       </div>
 
-      {/* MAIN CONTENT */}
       <div className="flex-grow-1">
         <div className="p-2 bg-light shadow-sm d-md-none">
           <button className="btn btn-warning" onClick={() => setShowSidebar(!showSidebar)}>

@@ -23,6 +23,7 @@ import FeaturedDeals from './pages/features'
 import AboutUs from './pages/about'
 import BlogPage from './pages/blog'
 import { BlogContentPage } from './pages/blogcontent'
+import RandomProductsPage from './pages/mencollection'
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path='/about' element={<AboutUs/>}/>
           <Route path='/blog' element={<BlogPage/>}/>
           <Route path='/blogcontent' element={<BlogContentPage/>}/>          
+          <Route path='/mencollection' element={<RandomProductsPage/>}/>          
         </Routes>
         <Footer />
 

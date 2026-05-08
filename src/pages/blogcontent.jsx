@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaBlog, FaRegCalendarAlt, FaTags, FaUser, FaArrowLeft } from "react-icons/fa";
+import { FaUser, FaCalendar, FaTag, FaArrowLeft } from "react-icons/fa";
 
 export function BlogContentPage() {
   const location = useLocation();
@@ -10,7 +10,7 @@ export function BlogContentPage() {
   if (!post) {
     return (
       <div className="container py-5 text-center">
-        <h4 className="text-muted">No blog found</h4>
+        <h4>No blog found</h4>
         <button
           className="btn btn-warning mt-3"
           onClick={() => navigate("/blog")}
@@ -24,39 +24,37 @@ export function BlogContentPage() {
   return (
     <div className="container py-5">
 
-      {/* Back Button */}
-      <div className="mb-4">
-        <button
-          className="btn btn-outline-warning"
-          onClick={() => navigate("/blog")}
-        >
-          <FaArrowLeft className="me-2" />
-          Back to Blog
-        </button>
-      </div>
+      <button
+        className="btn btn-outline-warning mb-4"
+        onClick={() => navigate("/blog")}
+      >
+        <FaArrowLeft className="me-2" />
+        Back to Blog
+      </button>
 
-      {/* Title Section */}
       <div className="text-center mb-4">
-        <FaBlog size={40} className="text-warning mb-2" />
         <h1 className="fw-bold text-dark">{post.title}</h1>
 
-        {/* Meta Info */}
-        <div className="d-flex justify-content-center flex-wrap gap-3 text-muted mt-3">
-          <span>
-            <FaUser className="me-1 text-warning" /> {post.author}
+        <div className="text-muted small mt-3">
+          <span className="me-3">
+            <FaUser className="text-warning me-1" />
+            {post.author} ({post.role})
+          </span>
+
+          <span className="me-3">
+            <FaCalendar className="text-warning me-1" />
+            {post.date}
           </span>
 
           <span>
-            <FaRegCalendarAlt className="me-1 text-warning" /> {post.date}
-          </span>
-
-          <span>
-            <FaTags className="me-1 text-warning" /> {post.category}
+            <FaTag className="text-warning me-1" />
+            {post.category}
           </span>
         </div>
+
+        <small className="text-muted">{post.readingTime}</small>
       </div>
 
-      {/* Image */}
       <div className="text-center mb-4">
         <img
           src={post.image}
@@ -71,18 +69,10 @@ export function BlogContentPage() {
         />
       </div>
 
-      {/* Content */}
       <div className="row justify-content-center">
         <div className="col-lg-8">
           <div className="bg-white p-4 shadow-sm rounded">
-            <p
-              style={{
-                fontSize: "18px",
-                lineHeight: "1.9",
-                color: "#444",
-                textAlign: "justify",
-              }}
-            >
+            <p style={{ fontSize: "18px", lineHeight: "1.9" }}>
               {post.content}
             </p>
           </div>

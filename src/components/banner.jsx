@@ -16,7 +16,7 @@ function Banner() {
           backgroundRepeat: "no-repeat",
           backgroundSize: "contain",
         }}
-        onClick={() => navigate("/category/featured")}
+        onClick={() => navigate("/mencollection")}
       />
 
       <div className="row g-0">
