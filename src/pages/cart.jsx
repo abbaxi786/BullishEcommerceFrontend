@@ -111,7 +111,6 @@ function SideCart({ placement = "end", ...props }) {
                     <div>
                       <h6 className="mb-1">{item.name}</h6>
 
-                      {/* PRICE WITH DISCOUNT */}
                       {item.discount > 0 ? (
                         <>
                           <small className="text-muted text-decoration-line-through d-block">
@@ -177,6 +176,7 @@ function SideCart({ placement = "end", ...props }) {
                 as={Link}
                 to="/checkout"
                 variant="warning"
+                onClick={()=>{handleClose()}}
                 className="w-100 text-white"
               >
                 Proceed to Checkout

@@ -32,7 +32,6 @@ export default function RandomProductsPage() {
     }
   };
 
-  /* ================= USE EFFECT ================= */
 
   useEffect(() => {
     fetchRandomProducts();
