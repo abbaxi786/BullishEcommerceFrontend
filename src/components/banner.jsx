@@ -21,13 +21,11 @@ function Banner() {
         onClick={() => navigate("/mencollection")}
       />
 
-      {/* ================= CATEGORY SECTION ================= */}
 
       <div className="container-fluid px-0">
 
         <div className="row g-0">
 
-          {/* CARD 1 */}
           <div
             className="col-6 col-md-3 categoryTile"
             onClick={() =>
@@ -37,7 +35,6 @@ function Banner() {
             <img src="/images/jacket.png" alt="jacket" />
           </div>
 
-          {/* CARD 2 */}
           <div
             className="col-6 col-md-3 categoryTile"
             onClick={() =>
