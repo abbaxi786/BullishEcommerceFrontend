@@ -49,7 +49,6 @@ function ViewProduct() {
     setQuantity(1);
   }, [id]);
 
-  // ---------------- FEEDBACK ----------------
   const fetchFeedback = async () => {
     try {
       const res = await axios.get(

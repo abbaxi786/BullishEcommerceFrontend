@@ -12,7 +12,6 @@ function NavBar() {
 
   const { user } = useContext(CartContext);
 
-  // 🔥 CONTROL NAV STATE
   const [expanded, setExpanded] = useState(false);
 
   const closeNavbar = () => setExpanded(false);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import axios from "axios";
 import {
   FaEnvelope,
@@ -6,6 +6,8 @@ import {
   FaMapMarkerAlt,
   FaPaperPlane,
 } from "react-icons/fa";
+import { NotificationContext } from "../function/notification";
+
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -15,6 +17,8 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
+
+  const {showToast}= useContext(NotificationContext);
 
   const handleChange = (e) => {
     setFormData({
@@ -33,7 +37,7 @@ export default function ContactPage() {
       );
 
       if (response.data.success) {
-        alert("Message sent successfully");
+        showToast("Message sent successfully");
 
         setFormData({
           name: "",
@@ -44,7 +48,7 @@ export default function ContactPage() {
         });
       }
     } catch (error) {
-      alert(error.response?.data?.message || "Something went wrong");
+              showToast(error.response?.data?.message || "Something went wrong","error");
     }
   };
 

@@ -5,14 +5,13 @@ import {
   FaEnvelope,
   FaPhoneAlt,
   FaUser,
+  FaRegCalendarAlt,
+  FaCommentDots,
 } from "react-icons/fa";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 
 export default function ContactTable() {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(false);
-
 
   const fetchContacts = async () => {
     try {
@@ -25,16 +24,12 @@ export default function ContactTable() {
       if (response.data.success) {
         setContacts(response.data.data);
       }
-
       setLoading(false);
-
     } catch (error) {
       setLoading(false);
       console.log(error);
     }
   };
-
-  /* ================= DELETE CONTACT ================= */
 
   const deleteContact = async (id) => {
     try {
@@ -49,129 +44,120 @@ export default function ContactTable() {
       );
 
       if (response.data.success) {
-        alert("Contact deleted successfully");
-
         setContacts((prev) =>
           prev.filter((item) => item._id !== id)
         );
       }
-
     } catch (error) {
       console.log(error);
-      alert("Failed to delete contact");
     }
   };
-
-  /* ================= USE EFFECT ================= */
 
   useEffect(() => {
     fetchContacts();
   }, []);
 
   return (
-    <div className="container-fluid py-4">
+    <div className="container-fluid py-4 bg-light">
 
-      {/* Header */}
+      {/* HEADER */}
       <div className="d-flex justify-content-between align-items-center mb-4">
+
         <h2 className="fw-bold text-warning">
           Contact Messages
         </h2>
 
-        <span className="badge bg-warning text-dark fs-6">
+        <span className="badge bg-warning text-dark fs-6 px-3 py-2">
           Total: {contacts.length}
         </span>
+
       </div>
 
-      {/* Table */}
+      {/* LOADING */}
+      {loading ? (
+        <div className="text-center py-5">
+          <div className="spinner-border text-warning" />
+          <h5 className="mt-3">Loading...</h5>
+        </div>
+      ) : contacts.length === 0 ? (
+        <div className="text-center py-5 text-muted">
+          No contact messages found
+        </div>
+      ) : (
 
-      <div className="table-responsive shadow-sm rounded">
-        <table className="table table-hover align-middle">
+        <div className="table-responsive shadow-sm rounded">
 
-          <thead className="table-warning">
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Subject</th>
-              <th>Description</th>
-              <th>Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+          <table className="table table-hover align-middle bg-white">
 
-          <tbody>
+            {/* HEADER */}
+            <thead className="table-warning">
 
-            {loading ? (
               <tr>
-                <td colSpan="8" className="text-center py-4">
-                  Loading...
-                </td>
+                <th>#</th>
+
+                <th>
+                  <FaUser className="me-1" />
+                  Name
+                </th>
+
+                <th>
+                  <FaEnvelope className="me-1" />
+                  Email
+                </th>
+
+                <th>
+                  <FaPhoneAlt className="me-1" />
+                  Phone
+                </th>
+
+                <th>
+                  Subject
+                </th>
+
+                <th>
+                  <FaCommentDots className="me-1" />
+                  Message
+                </th>
+
+                <th>
+                  <FaRegCalendarAlt className="me-1" />
+                  Date
+                </th>
+
+                <th>
+                  Action
+                </th>
               </tr>
-            ) : contacts.length === 0 ? (
-              <tr>
-                <td colSpan="8" className="text-center py-4">
-                  No contact messages found
-                </td>
-              </tr>
-            ) : (
-              contacts.map((contact, index) => (
+
+            </thead>
+
+            {/* BODY */}
+            <tbody>
+
+              {contacts.map((contact, index) => (
+
                 <tr key={contact._id}>
 
-                  {/* Index */}
                   <td>{index + 1}</td>
 
-                  {/* Name */}
-                  <td>
-                    <FaUser className="text-warning me-2" />
-                    {contact.name}
-                  </td>
+                  <td>{contact.name}</td>
 
-                  {/* Email */}
-                  <td>
-                    <FaEnvelope className="text-warning me-2" />
-                    {contact.email}
-                  </td>
+                  <td>{contact.email}</td>
 
-                  {/* Phone */}
-                  <td>
-                    <FaPhoneAlt className="text-warning me-2" />
-                    {contact.phoneNumber}
-                  </td>
+                  <td>{contact.phoneNumber}</td>
 
-                  {/* Subject */}
                   <td>{contact.subject || "General"}</td>
 
-                  {/* Message Tooltip */}
-                  <td style={{ maxWidth: "180px" }}>
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={
-                        <Tooltip id={`tooltip-${contact._id}`}>
-                          {contact.message}
-                        </Tooltip>
-                      }
-                    >
-                      <span
-                        style={{
-                          cursor: "pointer",
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          display: "block",
-                        }}
-                      >
-                        {contact.message}
-                      </span>
-                    </OverlayTrigger>
+                  <td style={{ maxWidth: "220px" }}>
+                    {contact.message.length > 80
+                      ? contact.message.substring(0, 80) + "..."
+                      : contact.message}
                   </td>
 
-                  {/* Date */}
                   <td>
                     {new Date(contact.createdAt).toLocaleDateString()}
                   </td>
 
-                  {/* Delete */}
                   <td>
                     <button
                       onClick={() => deleteContact(contact._id)}
@@ -182,12 +168,17 @@ export default function ContactTable() {
                   </td>
 
                 </tr>
-              ))
-            )}
 
-          </tbody>
-        </table>
-      </div>
+              ))}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      )}
+
     </div>
   );
 }

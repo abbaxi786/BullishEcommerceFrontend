@@ -61,7 +61,6 @@ function Search() {
     setSearch(e.target.value);
   };
 
-  /* ================= GET CATEGORIES ================= */
 
   useEffect(() => {
 

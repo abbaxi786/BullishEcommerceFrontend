@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaShoppingBag } from "react-icons/fa";
-import Cards from "../components/card";
+import { useNavigate } from "react-router-dom";
 
 export default function RandomProductsPage() {
-
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
 
   const fetchRandomProducts = async () => {
     try {
-
       setLoading(true);
 
       const response = await axios.get(
@@ -23,15 +22,11 @@ export default function RandomProductsPage() {
       }
 
       setLoading(false);
-
     } catch (error) {
-
-      setLoading(false);
       console.log(error);
-
+      setLoading(false);
     }
   };
-
 
   useEffect(() => {
     fetchRandomProducts();
@@ -40,136 +35,194 @@ export default function RandomProductsPage() {
   return (
     <div className="container-fluid py-5 bg-light">
 
-      {/* ================= HERO SECTION ================= */}
-
       <div
         className="position-relative rounded-4 overflow-hidden mb-5"
         style={{
-          height: "350px",
+          height: "380px",
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1400')",
+            "url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1600')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-
-        {/* Overlay */}
-
         <div
           style={{
             position: "absolute",
             inset: 0,
             backgroundColor: "rgba(0,0,0,0.6)",
-            backdropFilter: "blur(2px)",
           }}
         />
 
-        {/* Content */}
-
         <div
-          className="position-relative h-100 d-flex flex-column justify-content-center align-items-center text-center text-white px-3"
+          className="position-relative h-100 d-flex flex-column justify-content-center align-items-center text-center text-white"
           style={{ zIndex: 2 }}
         >
+          <FaShoppingBag size={50} className="text-warning mb-3" />
 
-          <FaShoppingBag
-            size={45}
-            className="text-warning mb-3"
-          />
-
-          <h1 className="fw-bold display-5">
+          <h1 className="fw-bold display-4">
             Featured Men's Collection
           </h1>
 
-          <p
-            className="text-light"
-            style={{ maxWidth: "700px" }}
-          >
-            Discover premium men's fashion,
-            trending outfits, luxury streetwear,
-            jackets, shoes, watches, and more.
+          <p className="text-light fs-5" style={{ maxWidth: "700px" }}>
+            Discover premium fashion, streetwear, shoes, watches & more
           </p>
-
         </div>
       </div>
 
-      {/* ================= HEADER ================= */}
-
-      <div className="d-flex justify-content-between align-items-center mb-4">
-
+      <div className="d-flex justify-content-between mb-4">
         <div>
-          <h2 className="fw-bold">
-            Featured Products
-          </h2>
-
-          <p className="text-muted mb-0">
-            Random products from every category
-          </p>
+          <h2 className="fw-bold">Featured Products</h2>
+          <p className="text-muted">Latest trending items</p>
         </div>
 
-        <span className="badge bg-warning text-dark px-3 py-2 fs-6">
+        <span
+          className="bg-warning text-dark px-3 py-2"
+          style={{
+            whiteSpace: "nowrap",
+            flexShrink: 0,
+            borderRadius: "20px",
+            fontSize: "0.9rem",
+            fontWeight: 600,
+            height:"40px"
+          }}
+        >
           {products.length} Products
         </span>
-
       </div>
 
-      {/* ================= LOADING ================= */}
-
       {loading ? (
-
         <div className="text-center py-5">
-
-          <div
-            className="spinner-border text-warning"
-            role="status"
-          />
-
-          <h5 className="mt-3">
-            Loading Products...
-          </h5>
-
+          <div className="spinner-border text-warning" />
+          <h5 className="mt-3">Loading...</h5>
         </div>
-
-      ) : products.length === 0 ? (
-
-        <div className="text-center py-5">
-
-          <h4 className="text-muted">
-            No Products Found
-          </h4>
-
-        </div>
-
       ) : (
-
-
         <div className="row g-4">
 
           {products.map((product) => (
-
             <div
               key={product._id}
-              className="col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center"
+              className="col-sm-6 col-md-4 col-lg-3"
             >
 
-              {/* YOUR CARD COMPONENT */}
+              <div
+                className="product-card"
+                onClick={() => navigate(`/product/${product._id}`)}
+              >
 
-              <Cards
-                _id={product._id}
-                image={product.image}
-                name={product.name}
-                description={product.description}
-                price={product.price}
-                category={product.category}
-                isFavourite={product.isFavourite}
-              />
+                {/* IMAGE */}
+                <img
+                  src={product.image?.[0]}
+                  alt={product.name}
+                  className="product-img"
+                />
+
+                {/* OVERLAY */}
+                <div className="overlay" />
+
+                {/* CONTENT */}
+                <div className="content">
+
+                  <span className="category">
+                    {product.category?.[0]?.name}
+                  </span>
+
+                  <h5 className="title">
+                    {product.name}
+                  </h5>
+
+                  <p className="desc">
+                    {product.description}
+                  </p>
+
+                  <h4 className="price">
+                    ${product.price}
+                  </h4>
+
+                </div>
+
+              </div>
 
             </div>
-
           ))}
 
         </div>
-
       )}
+
+      {/* STYLES */}
+      <style>
+        {`
+          .product-card {
+            position: relative;
+            height: 420px;
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.4s ease;
+          }
+
+          .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease;
+          }
+
+          .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.25);
+            transition: 0.4s ease;
+          }
+
+          .content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            color: white;
+            transform: translateY(70%);
+            transition: 0.4s ease;
+          }
+
+          .category {
+            background: #ffc107;
+            color: black;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+          }
+
+          .title {
+            margin-top: 10px;
+            font-weight: bold;
+          }
+
+          .desc {
+            font-size: 13px;
+            opacity: 0.8;
+          }
+
+          .price {
+            color: #ffc107;
+            margin-top: 8px;
+          }
+
+          /* HOVER EFFECT */
+          .product-card:hover .product-img {
+            transform: scale(1.1);
+            filter: blur(2px) brightness(0.6);
+          }
+
+          .product-card:hover .overlay {
+            background: rgba(0,0,0,0.55);
+          }
+
+          .product-card:hover .content {
+            transform: translateY(0);
+          }
+        `}
+      </style>
 
     </div>
   );
