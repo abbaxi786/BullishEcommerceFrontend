@@ -32,7 +32,7 @@ function Banner() {
               navigate("/category/69e2109e78e59f607d72c33a")
             }
           >
-            <img src="/images/jacket.png" alt="jacket" />
+            <img src="/images/jacket.webp" alt="jacket" />
           </div>
 
           <div
@@ -41,7 +41,7 @@ function Banner() {
               navigate("/category/69e2109e78e59f607d72c33a")
             }
           >
-            <img src="/images/shoes.png" alt="shoes" />
+            <img src="/images/shoes.webp" alt="shoes" />
           </div>
 
           {/* CARD 3 */}
@@ -51,7 +51,7 @@ function Banner() {
               navigate("/category/69e2105d78e59f607d72c337")
             }
           >
-            <img src="/images/watch.png" alt="watch" />
+            <img src="/images/watch.webp" alt="watch" />
           </div>
 
           {/* CARD 4 */}
@@ -61,7 +61,7 @@ function Banner() {
               navigate("/category/69e2108478e59f607d72c338")
             }
           >
-            <img src="/images/shirt.png" alt="shirt" />
+            <img src="/images/shirt.webp" alt="shirt" />
           </div>
 
         </div>

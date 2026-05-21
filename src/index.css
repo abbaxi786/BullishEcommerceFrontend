@@ -121,7 +121,7 @@
 .bannerSetting {
   height: 450px;
   width: 100%;
-  background-image: url('/images/mainBanner.png');
+  background-image: url('/images/mainBanner.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -158,7 +158,7 @@
 @media (max-width: 500px) {
   .bannerSetting {
     height: 500px;
-    background-image: url('/images/mobileimage.png');
+    background-image: url('/images/mobileimage.webp');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;

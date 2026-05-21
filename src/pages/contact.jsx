@@ -67,7 +67,6 @@ export default function ContactPage() {
             backgroundPosition: "center",
           }}
         >
-          {/* Blur Overlay */}
           <div
             style={{
               position: "absolute",
